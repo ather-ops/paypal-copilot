@@ -1,0 +1,9 @@
+transaction_id,order_id,customer_name,customer_email,item,item_type,amount,currency,order_date,ship_date,carrier,tracking_number,delivery_status,delivery_date,ship_to_matches_transaction_address,signature_on_delivery,buyer_messages,listing_matches_item
+REPLACE_WITH_SANDBOX_TXN_ID_1,ORD-1001,Test Buyer One,buyer1@personal.example.com,Wireless Headphones,physical,120.00,USD,2026-10-20,2026-10-21,TestCarrier,TEST-TRK-0001,Delivered,2026-10-25,yes,yes,"Hi, I never got my parcel.",yes
+REPLACE_WITH_SANDBOX_TXN_ID_2,ORD-1002,Test Buyer Two,buyer2@personal.example.com,Ceramic Lamp,physical,64.50,USD,2026-10-18,2026-10-19,TestCarrier,TEST-TRK-0002,Delivered,2026-10-24,yes,no,"The lamp has a chip and looks different from the photos.",no
+REPLACE_WITH_SANDBOX_TXN_ID_3,ORD-1003,Test Buyer Three,buyer3@personal.example.com,Running Shoes,physical,310.00,USD,2026-10-22,2026-10-23,TestCarrier,TEST-TRK-0003,Delivered,2026-10-28,yes,yes,"I did not make this purchase.",yes
+ORD-1004-NO-TXN,ORD-1004,Test Buyer Four,buyer4@personal.example.com,Desk Organizer,physical,35.00,USD,2026-10-25,2026-10-26,TestCarrier,TEST-TRK-0004,In transit,,yes,no,"Where is my order?",yes
+ORD-1005-NO-TXN,ORD-1005,Test Buyer Five,buyer5@personal.example.com,Phone Case,physical,18.00,USD,2026-10-15,2026-10-16,TestCarrier,TEST-TRK-0005,Delivered,2026-10-22,no,no,"Package never arrived at my house.",yes
+ORD-1006-NO-TXN,ORD-1006,Test Buyer Six,buyer6@personal.example.com,Photo Editing Course,digital,89.00,USD,2026-10-10,,,,Access granted,2026-10-10,yes,no,"I cannot access the course.",yes
+ORD-1007-NO-TXN,ORD-1007,Test Buyer Seven,buyer7@personal.example.com,Bluetooth Speaker,physical,75.00,USD,2026-10-12,2026-10-13,TestCarrier,TEST-TRK-0007,Returned to sender,,yes,no,"Still waiting for my speaker.",yes
+ORD-1008-NO-TXN,ORD-1008,Test Buyer Eight,buyer8@personal.example.com,Yoga Mat,physical,42.00,USD,2026-10-05,,,,Not shipped,,yes,no,"No update for three weeks.",yes
