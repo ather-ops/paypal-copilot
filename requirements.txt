@@ -9,3 +9,5 @@ pydantic
 requests
 python-dotenv
 streamlit
+fastapi
+uvicorn
