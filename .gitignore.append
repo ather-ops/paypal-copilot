@@ -1,0 +1,20 @@
+# --- add these lines to the Python .gitignore GitHub created ---
+# secrets (never commit)
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# raw third-party pages stay local
+data/raw/*
+!data/raw/.gitkeep
+
+# generated search indexes
+*.faiss
+*.index
+data/processed/index/
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
