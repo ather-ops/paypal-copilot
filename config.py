@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-# Load variables from the .env file in the root
 load_dotenv()
 
 PAYPAL_BASE_URL = os.getenv("PAYPAL_BASE_URL")

@@ -24,7 +24,7 @@ def get_paypal_access_token() -> str:
         "grant_type": "client_credentials"
     }
 
-    response = requests.post(url, auth=(PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET), headers=headers, data=data)
+    response = requests.post(url, auth = (PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET), headers=headers, data=data)
 
     if response.status_code != 200:
         raise Exception(f"Failed to authenticate with PayPal ({response.status_code}): {response.text}")
