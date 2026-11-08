@@ -1,3 +1,26 @@
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+
+# Virtual environment
 venv/
-venv/
+.venv/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Generated vector stores
+rag/vector_store/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
