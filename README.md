@@ -1,49 +1,78 @@
-# PayPal Copilot
+<p align="center">
+  <img src="assets/paypal_copilot_cover.png" alt="PayPal Copilot: automated dispute handling with AI" width="100%">
+</p>
 
-### AI-Powered Merchant Dispute Analysis & Resolution Assistant
+<h1 align="center">PayPal Copilot</h1>
 
-[PayPal Copilot Cover](assets/paypal_copilot_cover.png)
+<p align="center">
+  <b>AI-powered merchant dispute analysis and resolution assistant</b><br>
+  Built for the PayPal AI Hackathon 2026
+</p>
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-red?logo=streamlit)](https://paypal-copilot-agenta.streamlit.app/)
-[![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python)](https://www.python.org/)
-[![AI](https://img.shields.io/badge/AI-Groq-orange)](https://groq.com/)
-[![RAG](https://img.shields.io/badge/RAG-FAISS-green)](https://github.com/facebookresearch/faiss)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<p align="center">
+  <a href="https://paypal-copilot-agenta.streamlit.app/"><img src="https://img.shields.io/badge/Live%20Demo-Streamlit-red?logo=streamlit" alt="Live Demo"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.12%2B-blue?logo=python" alt="Python"></a>
+  <a href="https://groq.com/"><img src="https://img.shields.io/badge/AI-Groq-orange" alt="Groq"></a>
+  <a href="https://github.com/facebookresearch/faiss"><img src="https://img.shields.io/badge/RAG-FAISS-green" alt="FAISS"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+</p>
 
-**PayPal Copilot** is an AI-powered merchant dispute analysis assistant designed to help merchants understand PayPal disputes, retrieve relevant policy guidance, evaluate available evidence, and receive structured recommendations for handling disputes.
+<p align="center">
+  <a href="https://paypal-copilot-agenta.streamlit.app/"><b>Live app</b></a>
+  &nbsp;|&nbsp; <a href="#how-it-works">How it works</a>
+  &nbsp;|&nbsp; <a href="#getting-started">Getting started</a>
+  &nbsp;|&nbsp; <a href="#running-tests">Tests</a>
+</p>
 
-Instead of manually reviewing dispute details and searching through policy documentation, merchants can use an AI agent that combines PayPal Sandbox APIs, Retrieval-Augmented Generation (RAG), and LLM-based reasoning.
-
-<sub>Live application: https://paypal-copilot-agenta.streamlit.app/</sub>
+<!-- Add the demo video link here, for example: | <a href="YOUR_VIDEO_LINK">Demo video</a> -->
 
 ---
 
+**PayPal Copilot** helps merchants understand PayPal disputes, find the relevant policy guidance, check what evidence is available, and receive a structured recommendation. It combines PayPal Sandbox APIs, Retrieval-Augmented Generation (RAG) and LLM reasoning in one Streamlit interface.
+
+> **Sandbox only.** This is an independent prototype. It never touches live merchant accounts and a person reviews every recommendation.
+
+## Table of contents
+
+- [Overview](#overview)
+- [Key features](#key-features)
+- [How it works](#how-it-works)
+- [Agent tools](#agent-tools)
+- [Knowledge base and RAG](#knowledge-base-and-rag)
+- [Technology stack](#technology-stack)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Running tests](#running-tests)
+- [Application screenshots](#application-screenshots)
+- [Deployment](#deployment)
+- [Security and limitations](#security-and-limitations)
+- [Future improvements](#future-improvements)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
+- [Disclaimer](#disclaimer)
+
 ## Overview
 
-Managing payment disputes can be time-consuming. Merchants need to understand the reason for a dispute, review transaction information, identify relevant policies, and determine what evidence may be required.
+Handling a payment dispute is slow. A merchant has to understand why the buyer opened it, review the transaction, find the rules that apply, and work out what evidence is needed, usually before a deadline.
 
-PayPal Copilot brings these steps into one interface.
+PayPal Copilot brings those steps into one place. It retrieves dispute information from the PayPal Sandbox, searches a locally indexed policy knowledge base, and uses an LLM agent to produce a recommendation the merchant can review.
 
-The application retrieves dispute information from PayPal Sandbox, searches a locally indexed policy knowledge base, and uses an LLM-powered agent to generate recommendations.
+## Key features
 
-### Key Features
-
-- **PayPal Sandbox Integration:** Retrieve active disputes and individual dispute details.
-- **AI Agent:** Uses Groq-powered LLM reasoning with function calling to select and execute available tools.
-- **Policy RAG:** Searches a FAISS vector database containing PayPal dispute knowledge-base content.
-- **Evidence Analysis:** Helps evaluate available dispute information and identify potential evidence gaps.
-- **Structured Recommendations:** Generates one of five possible recommendations:
+- **PayPal Sandbox integration:** retrieve open disputes and the details of any single dispute.
+- **AI agent:** Groq-powered reasoning with function calling to choose and run the available tools.
+- **Policy RAG:** semantic search over a FAISS index built from PayPal dispute knowledge-base content.
+- **Evidence analysis:** helps evaluate the available dispute information and spot evidence gaps.
+- **Structured recommendations:** every analysis ends with one of five outcomes:
   - `FIGHT`
   - `REFUND`
   - `OFFER`
   - `GATHER_MORE_EVIDENCE`
   - `ESCALATE`
-- **Dispute Dashboard:** View dispute information and inspect individual disputes through Streamlit.
-- **Human Review:** Displays recommendations for merchant review rather than automatically executing dispute actions.
+- **Dispute dashboard:** browse disputes and inspect them one at a time.
+- **Human review:** recommendations are shown for the merchant to review. Nothing is executed automatically.
 
----
-
-## How It Works
+## How it works
 
 ```mermaid
 flowchart TD
@@ -64,54 +93,52 @@ flowchart TD
     M --> N[Human Review]
 ```
 
-### Agent Workflow
+### Agent workflow
 
-1. The merchant opens the dashboard and retrieves available disputes.
+1. The merchant opens the dashboard and loads the available disputes.
 2. The merchant selects a dispute to inspect.
-3. The application retrieves the corresponding dispute details from PayPal Sandbox.
+3. The app retrieves that dispute's details from the PayPal Sandbox.
 4. The AI agent receives the merchant's analysis request.
-5. The agent selects relevant tools using Groq function calling.
-6. The policy search tool retrieves relevant knowledge-base content through semantic similarity search.
-7. The agent combines the available dispute information and retrieved policy context.
-8. The application presents its analysis and recommended next steps for human review.
+5. The agent chooses the relevant tools through Groq function calling.
+6. The policy search tool retrieves matching knowledge-base content by semantic similarity.
+7. The agent combines the dispute information with the retrieved policy context.
+8. The app presents the analysis and recommended next steps for human review.
 
----
+## Agent tools
 
-## Technology Stack
-
-| Component | Technology |
+| Module | Purpose |
 |---|---|
-| Frontend | Streamlit |
-| Programming Language | Python |
-| LLM Provider | Groq |
-| Agent Tool Calling | Groq Function Calling |
-| Agent Tools | Smolagents |
-| RAG Framework | Custom RAG Pipeline |
-| Vector Database | FAISS |
-| Embedding Model | Sentence Transformers (`all-MiniLM-L6-v2`) |
-| API Integration | PayPal REST API (Sandbox) |
-| Data Processing | NumPy, Pandas |
-| API Requests | Requests |
-| Environment Management | Python dotenv |
-| Testing | Pytest |
+| `tools/paypal_auth.py` | Gets and reuses a PayPal Sandbox access token |
+| `tools/paypal_disputes.py` | Lists disputes from the Sandbox |
+| `tools/paypal_disputes_details.py` | Reads the details of one dispute |
+| `tools/paypal_tools.py` | Tool wrappers the agent can call |
+| `tools/policy_search.py` | Semantic search over the policy knowledge base |
+| `tools/groq_client.py` | Client for the Groq LLM |
 
----
+## Knowledge base and RAG
 
-## RAG Architecture
+PayPal Copilot uses a custom RAG pipeline to retrieve dispute-policy guidance.
 
-PayPal Copilot uses a custom Retrieval-Augmented Generation pipeline to retrieve relevant dispute-policy information.
+**What the knowledge base covers**
 
-### Retrieval Pipeline
+- Dispute lifecycle: stages, statuses, deadlines and response options.
+- Dispute reasons (item not received, not as described, unauthorized and others) and the evidence each one needs.
+- Evidence types and what makes proof of delivery strong.
+- Seller Protection rules, following the **United States** policy.
+- Merchant actions: message, offer, accept, escalate and appeal.
 
-1. PayPal dispute knowledge-base PDF content is processed.
-2. The content is divided into smaller text chunks.
-3. Sentence Transformers generates embeddings using `all-MiniLM-L6-v2`.
-4. Embeddings are normalized and stored in a FAISS index.
-5. A merchant's query is converted into an embedding.
-6. FAISS performs similarity search and returns relevant chunks.
-7. Retrieved policy context is passed to the AI agent.
+The content is original, paraphrased summaries of public PayPal documentation. It is **not official PayPal text**, and rules differ by country.
 
-### Vector Store
+**Retrieval pipeline**
+
+1. The knowledge-base PDF content is processed and split into smaller text chunks.
+2. Sentence Transformers (`all-MiniLM-L6-v2`) creates an embedding for each chunk.
+3. The embeddings are normalized and stored in a FAISS index.
+4. A merchant's question is converted into an embedding the same way.
+5. FAISS similarity search returns the closest chunks.
+6. The retrieved context is passed to the AI agent.
+
+**Vector store**
 
 ```text
 rag/
@@ -123,14 +150,30 @@ rag/
     └── config.json
 ```
 
-The vector store is included in the repository so the deployed application can retrieve policy information without rebuilding the index at startup.
+The vector store is committed to the repository, so the deployed app can search policy content without rebuilding the index at startup.
 
----
+## Technology stack
 
-## Project Structure
+| Component | Technology |
+|---|---|
+| Frontend | Streamlit |
+| Language | Python |
+| LLM provider | Groq |
+| Agent tool calling | Groq function calling |
+| Agent tools | Smolagents |
+| RAG framework | Custom RAG pipeline |
+| Vector database | FAISS |
+| Embedding model | Sentence Transformers (`all-MiniLM-L6-v2`) |
+| API integration | PayPal REST API (Sandbox) |
+| Data processing | NumPy, Pandas |
+| API requests | Requests |
+| Environment management | python-dotenv |
+| Testing | Pytest |
+
+## Project structure
 
 ```text
-paypal-copilot-1/
+paypal-copilot/
 │
 ├── .streamlit/
 │
@@ -142,7 +185,7 @@ paypal-copilot-1/
 │   └── app.py
 │
 ├── assets/
-│   └── paypal_copilot_cover
+│   └── paypal_copilot_cover.png
 │
 ├── data/
 │
@@ -183,18 +226,16 @@ paypal-copilot-1/
 └── TODO.md
 ```
 
----
+## Getting started
 
-## Getting Started
-
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/ather-ops/paypal-copilot.git
 cd paypal-copilot
 ```
 
-### 2. Create a Virtual Environment
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -202,26 +243,28 @@ python -m venv .venv
 
 Activate it:
 
-**Windows:**
+**Windows**
 
 ```bash
 .venv\Scripts\activate
 ```
 
-**Linux / macOS:**
+**Linux / macOS**
 
 ```bash
 source .venv/bin/activate
 ```
 
-### 3. Install Dependencies
+### 3. Install dependencies
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
+The first run downloads the embedding model, so it needs an internet connection and can take a moment.
+
+### 4. Configure environment variables
 
 Create a `.env` file in the project root:
 
@@ -235,29 +278,25 @@ GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=openai/gpt-oss-120b
 ```
 
-**Important:** Use PayPal Sandbox credentials, not live PayPal credentials. Never commit your `.env` file or expose API keys.
+> **Important:** use PayPal **Sandbox** credentials, never live ones. Do not commit your `.env` file or share your keys.
 
-### 5. Run the Application
+### 5. Run the application
 
 ```bash
 streamlit run app/app.py
 ```
 
-The application will open in your browser.
+The app opens in your browser.
 
----
+## Running tests
 
-## Running Tests
-
-The project includes tests for its core components.
-
-Run the complete test suite:
+Run the full suite:
 
 ```bash
 python -m pytest tests/ -v
 ```
 
-Individual test modules:
+Or run one module at a time:
 
 ```bash
 python -m pytest tests/test_auth.py -v
@@ -271,39 +310,27 @@ The tests cover:
 
 - PayPal Sandbox authentication.
 - Dispute retrieval.
-- Individual dispute-detail retrieval.
+- Single-dispute detail retrieval.
 - Semantic policy retrieval.
-- End-to-end AI agent tool calling.
+- End-to-end agent tool calling.
 
----
+## Application screenshots
 
-## Application Screenshots
+Screenshots from testing and development:
 
-### Test and Application Results
-
-The following screenshots document the application's testing and development workflow.
-
-![Test Image 1](images/test_img_1.png)
-
-![Test Image 2](images/test_img_2.png)
-
-![Test Image 3](images/test_img_3.png)
-
-![Test Image 4](images/test_img_4.png)
-
-![Test Image 5](images/test_img_5.png)
-
----
+| | |
+|---|---|
+| ![Test run 1](images/test_img_1.png) | ![Test run 2](images/test_img_2.png) |
+| ![Test run 3](images/test_img_3.png) | ![Test run 4](images/test_img_4.png) |
+| ![Test run 5](images/test_img_5.png) | |
 
 ## Deployment
 
-The application is deployed using Streamlit Community Cloud.
+The app is deployed on Streamlit Community Cloud.
 
-**Live Demo:** [Open PayPal Copilot](https://paypal-copilot-agenta.streamlit.app/)
+**Live demo:** [Open PayPal Copilot](https://paypal-copilot-agenta.streamlit.app/)
 
-Deployment configuration uses Streamlit Secrets for API credentials.
-
-Required secrets:
+Credentials are provided through Streamlit Secrets. Required secrets:
 
 ```toml
 PAYPAL_CLIENT_ID = "your_sandbox_client_id"
@@ -313,46 +340,40 @@ GROQ_API_KEY = "your_groq_api_key"
 GROQ_MODEL = "openai/gpt-oss-120b"
 ```
 
----
+## Security and limitations
 
-## Security and Limitations
-
-PayPal Copilot is currently a prototype built around PayPal Sandbox integration.
+PayPal Copilot is a prototype built around the PayPal Sandbox.
 
 - It does not connect to live merchant accounts.
-- AI-generated recommendations are suggestions, not guaranteed outcomes.
-- Policy retrieval depends on the available knowledge-base content, which may not reflect the latest PayPal policy updates.
-- The knowledge base contains summaries of publicly available PayPal documentation, not official PayPal policy text.
-- The application does not automatically submit dispute evidence, issue refunds, or execute dispute-resolution actions.
-- Human review is required before any real-world dispute action.
+- AI recommendations are suggestions, not guaranteed outcomes.
+- Policy retrieval depends on the knowledge-base content, which may not reflect the latest PayPal policy updates.
+- The knowledge base holds summaries of public PayPal documentation, not official PayPal text, and follows the United States Seller Protection policy.
+- The app does not automatically submit evidence, issue refunds or run dispute actions.
+- A person must review every recommendation before any real-world action.
 
-Never use the prototype's recommendations as a substitute for reviewing the actual dispute and applicable PayPal requirements.
+Do not treat the prototype's output as a substitute for reading the actual dispute and PayPal's current requirements.
 
----
-
-## Future Improvements
+## Future improvements
 
 - More advanced evidence evaluation.
-- Evidence-document ingestion and analysis.
-- Improved dispute-specific policy retrieval.
-- Stronger recommendation confidence and explainability.
+- Evidence document ingestion and analysis.
+- Better dispute-specific policy retrieval.
+- Clearer confidence levels and explanations for each recommendation.
 - Merchant authentication and account isolation.
 - Persistent dispute history and audit logs.
 - Human-approved action workflows.
-- Production-grade security and deployment architecture.
+- Production-grade security and deployment.
 
----
+## Acknowledgements
+
+Built with [Streamlit](https://streamlit.io/), [Groq](https://groq.com/), [FAISS](https://github.com/facebookresearch/faiss), [Sentence Transformers](https://www.sbert.net/), [smolagents](https://github.com/huggingface/smolagents) and the [PayPal developer platform](https://developer.paypal.com/).
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
----
+Released under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Disclaimer
 
-PayPal Copilot is an independent experimental project created for demonstration and development purposes.
+PayPal Copilot is an independent experimental project created for demonstration and development purposes. It is not affiliated with, endorsed by, or officially associated with PayPal, Inc. PayPal is a trademark of its respective owner.
 
-It is not affiliated with, endorsed by, or officially associated with PayPal, Inc.
-
-PayPal is a trademark of its respective owner.
+<p align="center"><sub>by ather-ops</sub></p>
