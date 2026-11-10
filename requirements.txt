@@ -1,6 +1,6 @@
-# Unpinned on purpose. After everything works, run `pip freeze` and pin the versions you tested.
 smolagents
 litellm
+groq
 faiss-cpu
 sentence-transformers
 pymupdf
