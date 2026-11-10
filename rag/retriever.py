@@ -103,6 +103,3 @@ class PayPalRetriever:
                 break
 
         return results
-
-
-retriever = PayPalRetriever()

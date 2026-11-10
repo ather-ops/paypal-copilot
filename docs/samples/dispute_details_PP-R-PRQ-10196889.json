@@ -84,7 +84,7 @@
     ],
     "fund_movements": [
         {
-            "party": "RECEIVER",
+            "party": "SELLER",
             "amount": {
                 "currency_code": "USD",
                 "value": "1.44"
@@ -173,7 +173,8 @@
         {
             "href": "https://api-m.sandbox.paypal.com/v1/customer/disputes/PP-R-PRQ-10196889",
             "rel": "self",
-            "method": "GET"
+            "method": "GET",
+            "encType": "application/json"
         }
     ]
 }

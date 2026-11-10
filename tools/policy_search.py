@@ -1,32 +1,35 @@
-
+from functools import lru_cache
 from smolagents import tool
-from rag.retriever import retriever
+from rag.retriever import PayPalRetriever
+
+
+@lru_cache(maxsize=1)
+def get_retriever():
+    return PayPalRetriever()
 
 
 @tool
 def search_paypal_policy(query: str) -> str:
     """
-    Search the PayPal dispute policy knowledge base.
+    Search official PayPal dispute policy documents.
 
-    Use this tool to find official policy guidance about
-    dispute reasons, seller protection, evidence requirements,
+    Use for dispute reasons, seller protection, evidence requirements,
     response deadlines, and dispute procedures.
 
     Args:
-        query: A specific question about PayPal dispute policies.
-
-    Returns:
-        Relevant policy passages with source references and scores.
+        query: Specific question about PayPal dispute policies.
     """
-
-    results = retriever.retrieve(
+    results = get_retriever().retrieve(
         query=query,
         top_k=5,
         document_type="knowledge_base"
     )
 
     if not results:
-        return "No relevant policy information was found. Do not invent policy guidance."
+        return (
+            "No relevant policy information was found. "
+            "Do not invent policy guidance."
+        )
 
     formatted_results = []
 

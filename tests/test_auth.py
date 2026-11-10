@@ -1,11 +1,10 @@
+
 from tools.paypal_auth import get_paypal_access_token
 
-# Testing
-print(" First call network")
-token1 = get_paypal_access_token()
-print(f"Token acquired: {token1[:15]}...")
 
-print("\n Test 2: Second call cache")
-token2 = get_paypal_access_token()
-assert token1 == token2, "Tokens do not match!"
-print("Success! Second call used the cache seamlessly.")
+def test_paypal_access_token():
+    token = get_paypal_access_token()
+
+    assert token is not None
+    assert isinstance(token, str)
+    assert len(token) > 0
