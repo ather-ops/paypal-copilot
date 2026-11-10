@@ -2,7 +2,7 @@
 
 ### AI-Powered Merchant Dispute Analysis & Resolution Assistant
 
-![PayPal Copilot Cover](assets/paypal_copilot_cover)
+[PayPal Copilot Cover](assets/paypal_copilot_cover.png)
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-red?logo=streamlit)](https://paypal-copilot-agenta.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python)](https://www.python.org/)
